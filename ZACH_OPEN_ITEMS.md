@@ -1,77 +1,24 @@
 # ZACH_OPEN_ITEMS
 
-> **⚠️ NOT PART OF THE ORIGINAL REPOSITORY.**
-> Added by Zach (`sshzach-afk`). Does not exist upstream in
-> `aicodepathways/crypto-yall`. See `ZACH_CHANGELOG.md`.
+> **NOT IN THE ORIGINAL REPO.** Added by Zach (`sshzach-afk`). See `ZACH_CHANGELOG.md`.
 
-Status key: 🔴 blocking · 🟡 watch · 🟢 informational
+### Open
+1. **Ask Discord about the $10 minimum before messaging Josh.** Members run 100–1500 capital; he may have already told people. Draft written, unsent.
+2. **Analysis layer unbuilt.** `crypto-automation-lab` has only a read-only client — no round trips, attribution, or MFE/MAE.
 
----
+### Watch
+3. **Funding dominates.** First 23h: realized **+$0.012**, funding **−$0.795** (66×). The strategy never reads funding rates. Testnet rates are inflated, but the blind spot is real.
+4. **ETH mispriced on testnet: +3.91%** vs mainnet (BTC +0.89%, SOL/AVAX/SUI within 0.2%). Testnet ETH results are not transferable.
+5. **5 of 7 assets only.** LINK and XRP aren't listed on testnet.
+6. **Public fork leaks config.** Variables print in plaintext in Actions logs; secrets stay masked. Accepted for unlimited minutes.
+7. **Mid-cap pyramids stay rounding-sensitive** if capital is ever lowered.
 
-## 🔴 Open
+### Known
+8. Kill switches block new orders only — closing positions is manual, no flatten-all.
+9. Upstream has zero tests.
+10. Actions cron drifts 30–60 min.
 
-**1. Raise the $10 minimum with the group before messaging Josh**
-Members run capital from 100 to 1500 — no two alike. Some may already have been
-told to raise it. Ask in Discord first; the docs may simply be stale rather
-than wrong-and-unknown. Draft message prepared, not sent.
-
-**2. Mid-cap pyramids remain price-sensitive**
-`round_size()` truncates (ROUND_DOWN). At `AGGRESSIVE_CAPITAL=1500` all tested
-SOL prices ($85–120) clear $10, but this is a floor that does not scale with
-capital. Re-check if capital is ever lowered.
-
-**3. Analysis layer not built**
-`crypto-automation-lab` (separate project) is scaffolded but only has a
-read-only Hyperliquid client. No round-trip reconstruction, no attribution,
-no MFE/MAE yet.
-
----
-
-## 🟡 Watch
-
-**4. Funding cost is untracked and dominant**
-First 23h: realized P&L **+$0.012**, funding paid **−$0.795**. Funding was 66×
-the realized P&L. The strategy has no funding awareness — it does not read
-funding rates when selecting entries. Testnet rates are unrealistic
-(ETH ~0.4%/hr vs ~0.01%/hr typical mainnet), so the magnitude will not carry
-over, but the structural blind spot will.
-
-**5. ETH is mispriced on testnet**
-Testnet vs mainnet, measured 2026-08-24: BTC +0.89%, **ETH +3.91%**,
-SOL +0.15%, AVAX +0.02%, SUI −0.14%. A z-score oscillator on a book that
-dislocated will produce genuinely different entries. **Treat testnet ETH
-results as non-transferable.**
-
-**6. Only 5 of 7 assets trade on testnet**
-LINK and XRP return `None` from the testnet info API — not listed. 29% of the
-documented universe is untested.
-
-**7. Public fork exposes configuration**
-Repository *variables* print in plaintext in Actions logs, and public repos
-have public logs. Capital settings, DD thresholds and equity are world-readable.
-Secrets are masked (`***`), including the account address. Accepted trade-off
-for unlimited Actions minutes.
-
----
-
-## 🟢 Informational
-
-**8. Kill switches do not close positions**
-They block new orders only. A full stop is all three switches OFF **plus**
-closing by hand in the Hyperliquid UI. No flatten-all exists.
-
-**9. Upstream has no tests**
-Zero test files in `aicodepathways/crypto-yall`.
-
-**10. Cron drift**
-GitHub Actions free tier is best-effort; 30–60 min delays expected. The
-30-minute Aggressive bot is not reliably a 30-minute bot.
-
----
-
-## Decisions not yet made
-
-- **Mainnet timing.** Currently testnet. No date set.
-- **R-multiple methodology.** Needs ATR-at-entry reconstructed from candles.
-- **Whether to ever modify upstream Python.** Default: no. See the rule in
-  `ZACH_CHANGELOG.md` — only `ZACH_*` files are added, nothing of Josh's is edited.
+### Undecided
+- Mainnet timing.
+- R-multiple method (needs ATR-at-entry from candles).
+- Modifying upstream Python — default **no**, `ZACH_*` additions only.
